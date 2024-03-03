@@ -2,22 +2,19 @@ import { useDroppable } from "@dnd-kit/core";
 import { useState } from "react";
 import { useRef } from "react";
 import Draggable from "./Draggable.tsx";
+import type { Task } from "./App";
 
 type DroppableProps = {
-  id: string;
+  id: "todo" | "doing" | "done";
   title: string;
-};
-
-type Task = {
-  id: string;
-  task: string;
+  tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 
 const Droppable = (props: DroppableProps) => {
   const { isOver, setNodeRef } = useDroppable({
     id: props.id,
   });
-  const [tasks, setTasks] = useState<Task[]>([]);
   const [task, setTask] = useState<string>("");
   const inputRef: React.RefObject<HTMLInputElement> = useRef(null);
 
@@ -29,7 +26,10 @@ const Droppable = (props: DroppableProps) => {
     e.preventDefault();
     if (!task) return;
 
-    setTasks([...tasks, { id: String(Date.now()), task }]);
+    props.setTasks([
+      ...props.tasks,
+      { id: String(Date.now()), task: task, tag: props.id },
+    ]);
     setTask("");
     inputRef.current?.focus();
   };
@@ -46,11 +46,13 @@ const Droppable = (props: DroppableProps) => {
     opacity: isOver ? 0.5 : 1,
   };
 
+  const myTasks = props.tasks.filter((t) => t.tag === props.id);
+
   return (
     <div ref={setNodeRef} style={style}>
       <h2 className="text-2xl mb-5">{props.title}</h2>
 
-      {tasks.map((t: Task) => (
+      {myTasks.map((t: Task) => (
         <Draggable key={t.id} id={t.id}>
           <div className="">{t.task}</div>
         </Draggable>
