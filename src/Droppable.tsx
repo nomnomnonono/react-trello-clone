@@ -49,11 +49,11 @@ const Droppable = (props: DroppableProps) => {
 
   return (
     <div ref={setNodeRef} style={style}>
-      <h2 className="text-2xl">{props.title}</h2>
+      <h2 className="text-2xl mb-5">{props.title}</h2>
 
       {tasks.map((t: Task) => (
         <Draggable key={t.id} id={t.id}>
-          {t.task}
+          <div className="">{t.task}</div>
         </Draggable>
       ))}
 
