@@ -1,15 +1,38 @@
 import { useDroppable } from "@dnd-kit/core";
+import { useState } from "react";
+import { useRef } from "react";
+import Draggable from "./Draggable.tsx";
 
 type DroppableProps = {
   id: string;
   title: string;
-  children: React.ReactNode;
+};
+
+type Task = {
+  id: string;
+  task: string;
 };
 
 const Droppable = (props: DroppableProps) => {
   const { isOver, setNodeRef } = useDroppable({
     id: props.id,
   });
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [task, setTask] = useState<string>("");
+  const inputRef: React.RefObject<HTMLInputElement> = useRef(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTask(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!task) return;
+
+    setTasks([...tasks, { id: String(Date.now()), task }]);
+    setTask("");
+    inputRef.current?.focus();
+  };
 
   const style = {
     display: "flex",
@@ -21,12 +44,29 @@ const Droppable = (props: DroppableProps) => {
     padding: "15px",
     borderRadius: "10px",
     backgroundColor: isOver ? "lightgreen" : "white",
+    textWrap: "balance",
   };
 
   return (
     <div ref={setNodeRef} style={style}>
       <h2 className="text-2xl">{props.title}</h2>
-      {props.children}
+
+      {tasks.map((t: Task) => (
+        <Draggable key={t.id} id={t.id}>
+          {t.task}
+        </Draggable>
+      ))}
+
+      <form className="pt-5 flex w-full" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={task}
+          onChange={handleChange}
+          ref={inputRef}
+          className="border border-black rounded-md flex-1"
+        />
+        <button className="text-xl font-bold px-2 py-0.5 ml-2">+</button>
+      </form>
     </div>
   );
 };
