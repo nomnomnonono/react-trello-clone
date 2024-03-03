@@ -13,7 +13,7 @@ const Draggable = (props: DraggableProps) => {
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : undefined,
-    color: transform ? "green" : undefined,
+    fontWeight: transform ? "bold" : undefined,
   };
 
   return (

@@ -43,7 +43,7 @@ const Droppable = (props: DroppableProps) => {
     border: "2px solid black",
     padding: "15px",
     borderRadius: "10px",
-    backgroundColor: isOver ? "lightgreen" : "white",
+    opacity: isOver ? 0.7 : 1,
     textWrap: "balance",
   };
 
