@@ -43,8 +43,7 @@ const Droppable = (props: DroppableProps) => {
     border: "2px solid black",
     padding: "15px",
     borderRadius: "10px",
-    opacity: isOver ? 0.7 : 1,
-    textWrap: "balance",
+    opacity: isOver ? 0.5 : 1,
   };
 
   return (
@@ -63,7 +62,7 @@ const Droppable = (props: DroppableProps) => {
           value={task}
           onChange={handleChange}
           ref={inputRef}
-          className="border border-black rounded-md flex-1"
+          className="border border-black rounded-md flex-1 px-2"
         />
         <button className="text-xl font-bold px-2 py-0.5 ml-2">+</button>
       </form>

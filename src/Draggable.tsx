@@ -19,7 +19,9 @@ const Draggable = (props: DraggableProps) => {
     border: "1px solid gray",
     boxShadow: "0 0 2px 0 black",
     borderRadius: "5px",
-    padding: "7px 10px",
+    padding: "10px",
+    inlineSize: "100%",
+    overflowWrap: "break-word",
   };
 
   return (
