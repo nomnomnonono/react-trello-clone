@@ -55,7 +55,7 @@ const Droppable = (props: DroppableProps) => {
 
       {myTasks.map((t: Task) => (
         <Draggable key={t.id} id={t.id}>
-          <div className="">{t.task}</div>
+          {t.task}
         </Draggable>
       ))}
 

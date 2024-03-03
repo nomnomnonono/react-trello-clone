@@ -26,14 +26,13 @@ const App = () => {
       return task;
     });
     setTasks(newTasks);
-    console.log(tasks);
   };
 
   return (
     <>
-      <h1 className="text-left text-3xl pt-10 pl-5">Trello Clone App</h1>
+      <h1 className="text-left text-4xl pt-12 pl-6">Trello Clone App</h1>
       <DndContext onDragEnd={handleDragEnd}>
-        <div className="mt-8 flex justify-between">
+        <div className="mt-10 flex justify-between">
           <Droppable id="todo" title="TODO" tasks={tasks} setTasks={setTasks} />
           <Droppable
             id="doing"
