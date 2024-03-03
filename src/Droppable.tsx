@@ -34,22 +34,23 @@ const Droppable = (props: DroppableProps) => {
     inputRef.current?.focus();
   };
 
-  const style = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    width: "calc((896px - 50px) / 3)",
-    gap: "10px",
-    border: "2px solid black",
-    padding: "15px",
-    borderRadius: "10px",
-    opacity: isOver ? 0.5 : 1,
-  };
-
   const myTasks = props.tasks.filter((t) => t.tag === props.id);
 
   return (
-    <div ref={setNodeRef} style={style}>
+    <div
+      ref={setNodeRef}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        width: "calc((896px - 50px) / 3)",
+        gap: "10px",
+        border: "2px solid black",
+        padding: "15px",
+        borderRadius: "10px",
+        opacity: isOver ? 0.5 : 1,
+      }}
+    >
       <h2 className="text-2xl mb-5">{props.title}</h2>
 
       {myTasks.map((t: Task) => (
